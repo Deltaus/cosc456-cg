@@ -43,6 +43,92 @@ display(void){
     glutWireCube(current_gs->cubesize);
     glutSwapBuffers();
 
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    static GLfloat vtx[8][3] =  //棱柱顶点坐标
+            {
+                    {0.0f,0.0f,0.0f},//0
+                    {0.0f,0.0f,0.5f},//1
+                    {0.0f,0.5f,0.0f},//2
+                    {0.0f, 0.5f, 0.5f},//3
+                    {0.5f, 0.0f, 0.0f},//4
+                    {0.5f,0.0f,0.5f},//5
+                    {0.5f,0.5f,0.0f},//6
+                    {0.5f, 0.5f, 0.5f}//7
+            };
+    GLfloat color[4][3] =  //棱柱顶点颜色
+            {
+                    {0.0f,0.0f,0.5f},
+                    {0.5f,0.0f,0.0f},
+                    {1.0f,1.0f,0.0f},
+                    {1.0f,0.0f,1.0f}
+            };
+    glRotatef(5.0f,10.0f,5.0f,15.0f);
+
+    glFrontFace(GL_CCW);
+    glPolygonMode(GL_FRONT, GL_FILL);
+    glPolygonMode(GL_BACK, GL_FILL);
+
+    glBegin(GL_POLYGON);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[1]);
+    glColor3fv(color[1]);
+    glVertex3fv(vtx[3]);
+    glColor3fv(color[2]);
+    glVertex3fv(vtx[7]);
+    glColor3fv(color[3]);
+    glVertex3fv(vtx[5]);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[5]);
+    glColor3fv(color[1]);
+    glVertex3fv(vtx[7]);
+    glColor3fv(color[2]);
+    glVertex3fv(vtx[4]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[6]);
+
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[7]);
+    glColor3fv(color[1]);
+    glVertex3fv(vtx[3]);
+    glColor3fv(color[2]);
+    glVertex3fv(vtx[2]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[6]);
+
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[3]);
+    glColor3fv(color[1]);
+    glVertex3fv(vtx[1]);
+    glColor3fv(color[2]);
+    glVertex3fv(vtx[0]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[2]);
+
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[1]);
+    glColor3fv(color[1]);
+    glVertex3fv(vtx[5]);
+    glColor3fv(color[2]);
+    glVertex3fv(vtx[4]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[0]);
+
+    glBegin(GL_POLYGON);
+    glColor3fv(color[3]);
+    glVertex3fv(vtx[0]);
+    glColor3fv(color[4]);
+    glVertex3fv(vtx[2]);
+    glColor3fv(color[5]);
+    glVertex3fv(vtx[6]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[4]);
+    glEnd();
+
+    glPopMatrix();
+    glFlush();
 
 }
 
