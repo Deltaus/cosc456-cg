@@ -44,7 +44,7 @@ display(void){
     glutSwapBuffers();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    static GLfloat vtx[8][3] =  //棱柱顶点坐标
+    static GLfloat vtx[8][3] =
             {
                     {0.0f,0.0f,0.0f},//0
                     {0.0f,0.0f,0.5f},//1
@@ -55,7 +55,7 @@ display(void){
                     {0.5f,0.5f,0.0f},//6
                     {0.5f, 0.5f, 0.5f}//7
             };
-    GLfloat color[4][3] =  //棱柱顶点颜色
+    GLfloat color[4][3] = 
             {
                     {0.0f,0.0f,0.5f},
                     {0.5f,0.0f,0.0f},
