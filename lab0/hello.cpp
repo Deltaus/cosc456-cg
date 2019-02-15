@@ -28,7 +28,7 @@ main(int argc, char **argv)
         glutInit(&argc,argv);
         glutInitDisplayMode(GLUT_RGB);
         glutInitWindowSize(gs.width,gs.height);
-        glutInitWindowPosition(100,100);
+        glutInitWindowPosition(200,200);
         glutCreateWindow(argv[0]);
 
         glutDisplayFunc(display);

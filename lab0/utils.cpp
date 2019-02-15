@@ -41,9 +41,8 @@ display(void){
     glClearColor(1.0, 0.5, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glutWireCube(current_gs->cubesize);
-    glutSwapBuffers();
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     static GLfloat vtx[8][3] =
             {
                     {0.0f,0.0f,0.0f},//0
@@ -55,20 +54,20 @@ display(void){
                     {0.5f,0.5f,0.0f},//6
                     {0.5f, 0.5f, 0.5f}//7
             };
-    GLfloat color[4][3] = 
+    GLfloat color[4][3] =
             {
                     {0.0f,0.0f,0.5f},
                     {0.5f,0.0f,0.0f},
                     {1.0f,1.0f,0.0f},
                     {1.0f,0.0f,1.0f}
             };
-    glRotatef(5.0f,10.0f,5.0f,15.0f);
+    //glRotatef(5.0f,10.0f,5.0f,15.0f);
 
     glFrontFace(GL_CCW);
-    glPolygonMode(GL_FRONT, GL_FILL);
-    glPolygonMode(GL_BACK, GL_FILL);
+    //glPolygonMode(GL_FRONT, GL_FILL);
+    //glPolygonMode(GL_BACK, GL_FILL);
 
-    glBegin(GL_POLYGON);
+    glBegin(GL_QUADS);
     glColor3fv(color[0]);
     glVertex3fv(vtx[1]);
     glColor3fv(color[1]);
@@ -85,9 +84,9 @@ display(void){
     glColor3fv(color[1]);
     glVertex3fv(vtx[7]);
     glColor3fv(color[2]);
-    glVertex3fv(vtx[4]);
-    glColor3fv(color[0]);
     glVertex3fv(vtx[6]);
+    glColor3fv(color[0]);
+    glVertex3fv(vtx[4]);
 
     glColor3fv(color[0]);
     glVertex3fv(vtx[7]);
@@ -116,7 +115,7 @@ display(void){
     glColor3fv(color[0]);
     glVertex3fv(vtx[0]);
 
-    glBegin(GL_POLYGON);
+    glBegin(GL_QUADS);
     glColor3fv(color[3]);
     glVertex3fv(vtx[0]);
     glColor3fv(color[4]);
@@ -127,13 +126,28 @@ display(void){
     glVertex3fv(vtx[4]);
     glEnd();
 
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glPopMatrix();
+
+    glutSwapBuffers();
     glFlush();
 
 }
 
 void
 reshape(int w, int h){
+
+
+    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+
+    //glMatrixMode (GL_PROJECTION);
+    //glLoadIdentity ();
+
+    //gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
+    //glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
+    gluLookAt (-0.25, -0.5, 0.75, 0.25, 0.25, 0.25, 0.0, 0.0, 1.0);
+    //glFlush();
 
 }
 
