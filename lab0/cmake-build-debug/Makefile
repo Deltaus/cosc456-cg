@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/deltau/MyProjects/GitHub/COSC456/lab0
+CMAKE_SOURCE_DIR = /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/deltau/MyProjects/GitHub/COSC456/lab0/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deltau/MyProjects/GitHub/COSC456/lab0/cmake-build-debug/CMakeFiles /Users/deltau/MyProjects/GitHub/COSC456/lab0/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deltau/MyProjects/GitHub/COSC456/lab0/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,113 +123,59 @@ lab0/fast:
 	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/build
 .PHONY : lab0/fast
 
-jmesh.o: jmesh.cpp.o
+hello.o: hello.cpp.o
 
-.PHONY : jmesh.o
-
-# target to build an object file
-jmesh.cpp.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/jmesh.cpp.o
-.PHONY : jmesh.cpp.o
-
-jmesh.i: jmesh.cpp.i
-
-.PHONY : jmesh.i
-
-# target to preprocess a source file
-jmesh.cpp.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/jmesh.cpp.i
-.PHONY : jmesh.cpp.i
-
-jmesh.s: jmesh.cpp.s
-
-.PHONY : jmesh.s
-
-# target to generate assembly for a file
-jmesh.cpp.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/jmesh.cpp.s
-.PHONY : jmesh.cpp.s
-
-library.o: library.c.o
-
-.PHONY : library.o
+.PHONY : hello.o
 
 # target to build an object file
-library.c.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/library.c.o
-.PHONY : library.c.o
+hello.cpp.o:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.o
+.PHONY : hello.cpp.o
 
-library.i: library.c.i
+hello.i: hello.cpp.i
 
-.PHONY : library.i
+.PHONY : hello.i
 
 # target to preprocess a source file
-library.c.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/library.c.i
-.PHONY : library.c.i
+hello.cpp.i:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.i
+.PHONY : hello.cpp.i
 
-library.s: library.c.s
+hello.s: hello.cpp.s
 
-.PHONY : library.s
+.PHONY : hello.s
 
 # target to generate assembly for a file
-library.c.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/library.c.s
-.PHONY : library.c.s
+hello.cpp.s:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.s
+.PHONY : hello.cpp.s
 
-main.o: main.cpp.o
+utils.o: utils.cpp.o
 
-.PHONY : main.o
+.PHONY : utils.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.o
-.PHONY : main.cpp.o
+utils.cpp.o:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.o
+.PHONY : utils.cpp.o
 
-main.i: main.cpp.i
+utils.i: utils.cpp.i
 
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-offreader.o: offreader.cpp.o
-
-.PHONY : offreader.o
-
-# target to build an object file
-offreader.cpp.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/offreader.cpp.o
-.PHONY : offreader.cpp.o
-
-offreader.i: offreader.cpp.i
-
-.PHONY : offreader.i
+.PHONY : utils.i
 
 # target to preprocess a source file
-offreader.cpp.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/offreader.cpp.i
-.PHONY : offreader.cpp.i
+utils.cpp.i:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.i
+.PHONY : utils.cpp.i
 
-offreader.s: offreader.cpp.s
+utils.s: utils.cpp.s
 
-.PHONY : offreader.s
+.PHONY : utils.s
 
 # target to generate assembly for a file
-offreader.cpp.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/offreader.cpp.s
-.PHONY : offreader.cpp.s
+utils.cpp.s:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.s
+.PHONY : utils.cpp.s
 
 # Help Target
 help:
@@ -240,18 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... lab0"
-	@echo "... jmesh.o"
-	@echo "... jmesh.i"
-	@echo "... jmesh.s"
-	@echo "... library.o"
-	@echo "... library.i"
-	@echo "... library.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... offreader.o"
-	@echo "... offreader.i"
-	@echo "... offreader.s"
+	@echo "... hello.o"
+	@echo "... hello.i"
+	@echo "... hello.s"
+	@echo "... utils.o"
+	@echo "... utils.i"
+	@echo "... utils.s"
 .PHONY : help
 
 

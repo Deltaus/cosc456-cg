@@ -1,4 +1,4 @@
-# Install script for directory: /Users/deltau/MyProjects/GitHub/COSC456/lab0
+# Install script for directory: /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/deltau/MyProjects/GitHub/COSC456/lab0/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
