@@ -11,8 +11,8 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/local/Cellar/glew/2.1.0/include/GL"
-  "/usr/local/Cellar/glfw/3.2.1/include/GLFW"
+  "/System/Library/Frameworks/OpenGL.framework"
+  "/System/Library/Frameworks/GLUT.framework/Headers"
   )
 
 # Targets to which this target links.

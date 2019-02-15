@@ -25,6 +25,8 @@ stdio.h
 -
 OpenGL/gl.h
 -
+OpenGL/glu.h
+-
 GLUT/glut.h
 -
 utils.h

@@ -8,6 +8,7 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 #include "utils.h"
+#define OUTPUT_MODE 1
 
 static graphics_state * current_gs;
 
@@ -36,9 +37,13 @@ init(graphics_state * gs){
 
 void
 display(void){
+
+    glClearColor(1.0, 0.5, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glutWireCube(current_gs->cubesize);
     glutSwapBuffers();
+
+
 }
 
 void
@@ -59,7 +64,14 @@ trackMotion(int x, int y) {
 void
 keys(unsigned char c, int x, int y) {
 
-    if(c == 'Q' || c == 'q') {
-        exit(EXIT_SUCCESS);
+    switch(c) {
+        case 'q':
+        case 'Q':
+            exit(EXIT_SUCCESS);
+            break;
+        case 's':
+        case 'S':
+            //
+            break;
     }
 }
