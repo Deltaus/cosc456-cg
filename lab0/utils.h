@@ -37,6 +37,7 @@ int  init_GLSL(char * vert_source, char * frag_source);
 jmesh * readOffFile(const char * filename);
 void printMesh(const jmesh *);
 void drawCube2(int speed, float dist, int index);
+void drawTest();
 
 #ifdef __cplusplus
 }

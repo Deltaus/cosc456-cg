@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <cmath>
 #include <GLUT/glut.h>
 #include "utils.h"
 #include "offreader.h"
@@ -34,8 +35,6 @@ int main(int argc, char **argv)
 
     gs.cubesize = strtod(argv[1], NULL);
     print_howto();
-
-    //printMesh(vert);
 
     { /* GLUT initialization */
         glutInit(&argc,argv);

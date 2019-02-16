@@ -8,7 +8,7 @@ main(void)
 {
     jmesh * mesh;
 
-    FILE * fp = fopen("beethoven.off", "r");
+    FILE * fp = fopen("planets.off", "r");
     mesh = new_jmesh(fp);
     fclose(fp);
 

@@ -13,6 +13,8 @@ stdio.h
 -
 string.h
 -
+cmath
+-
 GLUT/glut.h
 -
 utils.h
