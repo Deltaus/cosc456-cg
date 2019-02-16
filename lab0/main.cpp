@@ -6,20 +6,24 @@
 int
 main(void)
 {
-    //printf("XXXXXX!");
-
     jmesh * mesh;
 
-    //printf("START");
-
-    FILE * fp = fopen("bunny.off", "r");
+    FILE * fp = fopen("beethoven.off", "r");
     mesh = new_jmesh(fp);
     fclose(fp);
 
     if (mesh == NULL)
         fprintf(stderr,"load_off_mesh failed\n");
 
-    //printf("Got mesh!");
+    /*
+    for(int i=0; i < 72; i++) {
+        for(int j = 0; j < 3; j++) {
+            printf("%f ", mesh->vertices[i * 3 + j]);
+        }
+        printf("\n");
+    }
+     */
+
     printf("nvert: %d ntri: %d", mesh->nvert, mesh->ntri);
     free_mesh(mesh);
 

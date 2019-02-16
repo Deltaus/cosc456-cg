@@ -105,19 +105,97 @@ CMakeFiles/lab0.dir/utils.cpp.o.provides: CMakeFiles/lab0.dir/utils.cpp.o.requir
 CMakeFiles/lab0.dir/utils.cpp.o.provides.build: CMakeFiles/lab0.dir/utils.cpp.o
 
 
+CMakeFiles/lab0.dir/jmesh.cpp.o: CMakeFiles/lab0.dir/flags.make
+CMakeFiles/lab0.dir/jmesh.cpp.o: ../jmesh.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lab0.dir/jmesh.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab0.dir/jmesh.cpp.o -c /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.cpp
+
+CMakeFiles/lab0.dir/jmesh.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lab0.dir/jmesh.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.cpp > CMakeFiles/lab0.dir/jmesh.cpp.i
+
+CMakeFiles/lab0.dir/jmesh.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab0.dir/jmesh.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.cpp -o CMakeFiles/lab0.dir/jmesh.cpp.s
+
+CMakeFiles/lab0.dir/jmesh.cpp.o.requires:
+
+.PHONY : CMakeFiles/lab0.dir/jmesh.cpp.o.requires
+
+CMakeFiles/lab0.dir/jmesh.cpp.o.provides: CMakeFiles/lab0.dir/jmesh.cpp.o.requires
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/jmesh.cpp.o.provides.build
+.PHONY : CMakeFiles/lab0.dir/jmesh.cpp.o.provides
+
+CMakeFiles/lab0.dir/jmesh.cpp.o.provides.build: CMakeFiles/lab0.dir/jmesh.cpp.o
+
+
+CMakeFiles/lab0.dir/offreader.cpp.o: CMakeFiles/lab0.dir/flags.make
+CMakeFiles/lab0.dir/offreader.cpp.o: ../offreader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lab0.dir/offreader.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab0.dir/offreader.cpp.o -c /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/offreader.cpp
+
+CMakeFiles/lab0.dir/offreader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lab0.dir/offreader.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/offreader.cpp > CMakeFiles/lab0.dir/offreader.cpp.i
+
+CMakeFiles/lab0.dir/offreader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab0.dir/offreader.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/offreader.cpp -o CMakeFiles/lab0.dir/offreader.cpp.s
+
+CMakeFiles/lab0.dir/offreader.cpp.o.requires:
+
+.PHONY : CMakeFiles/lab0.dir/offreader.cpp.o.requires
+
+CMakeFiles/lab0.dir/offreader.cpp.o.provides: CMakeFiles/lab0.dir/offreader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/offreader.cpp.o.provides.build
+.PHONY : CMakeFiles/lab0.dir/offreader.cpp.o.provides
+
+CMakeFiles/lab0.dir/offreader.cpp.o.provides.build: CMakeFiles/lab0.dir/offreader.cpp.o
+
+
+CMakeFiles/lab0.dir/library.c.o: CMakeFiles/lab0.dir/flags.make
+CMakeFiles/lab0.dir/library.c.o: ../library.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/lab0.dir/library.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lab0.dir/library.c.o   -c /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/library.c
+
+CMakeFiles/lab0.dir/library.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lab0.dir/library.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/library.c > CMakeFiles/lab0.dir/library.c.i
+
+CMakeFiles/lab0.dir/library.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lab0.dir/library.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/library.c -o CMakeFiles/lab0.dir/library.c.s
+
+CMakeFiles/lab0.dir/library.c.o.requires:
+
+.PHONY : CMakeFiles/lab0.dir/library.c.o.requires
+
+CMakeFiles/lab0.dir/library.c.o.provides: CMakeFiles/lab0.dir/library.c.o.requires
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/library.c.o.provides.build
+.PHONY : CMakeFiles/lab0.dir/library.c.o.provides
+
+CMakeFiles/lab0.dir/library.c.o.provides.build: CMakeFiles/lab0.dir/library.c.o
+
+
 # Object files for target lab0
 lab0_OBJECTS = \
 "CMakeFiles/lab0.dir/hello.cpp.o" \
-"CMakeFiles/lab0.dir/utils.cpp.o"
+"CMakeFiles/lab0.dir/utils.cpp.o" \
+"CMakeFiles/lab0.dir/jmesh.cpp.o" \
+"CMakeFiles/lab0.dir/offreader.cpp.o" \
+"CMakeFiles/lab0.dir/library.c.o"
 
 # External object files for target lab0
 lab0_EXTERNAL_OBJECTS =
 
 lab0: CMakeFiles/lab0.dir/hello.cpp.o
 lab0: CMakeFiles/lab0.dir/utils.cpp.o
+lab0: CMakeFiles/lab0.dir/jmesh.cpp.o
+lab0: CMakeFiles/lab0.dir/offreader.cpp.o
+lab0: CMakeFiles/lab0.dir/library.c.o
 lab0: CMakeFiles/lab0.dir/build.make
 lab0: CMakeFiles/lab0.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable lab0"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable lab0"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lab0.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -127,6 +205,9 @@ CMakeFiles/lab0.dir/build: lab0
 
 CMakeFiles/lab0.dir/requires: CMakeFiles/lab0.dir/hello.cpp.o.requires
 CMakeFiles/lab0.dir/requires: CMakeFiles/lab0.dir/utils.cpp.o.requires
+CMakeFiles/lab0.dir/requires: CMakeFiles/lab0.dir/jmesh.cpp.o.requires
+CMakeFiles/lab0.dir/requires: CMakeFiles/lab0.dir/offreader.cpp.o.requires
+CMakeFiles/lab0.dir/requires: CMakeFiles/lab0.dir/library.c.o.requires
 
 .PHONY : CMakeFiles/lab0.dir/requires
 

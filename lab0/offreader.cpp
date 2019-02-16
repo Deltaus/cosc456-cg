@@ -2,6 +2,7 @@
 #include<stdbool.h>
 #include<string.h>
 #include<stdlib.h>
+#include <cmath>
 #include"offreader.h"
 #include"jmesh.h"
 
@@ -26,20 +27,20 @@ ptrn add_element(const int * v, int num, int * trig, int * size, int cur, float 
         normal = p_temp_n;
     }
     int i;
-    for(i = 1; i <= num; i++) {
-        trig[(cur + i) * 3 + 0] = v[(i-1) * 3 + 0]; //v0
-        trig[(cur + i) * 3 + 1] = v[(i-1) * 3 + 1]; //v1
-        trig[(cur + i) * 3 + 2] = v[(i-1) * 3 + 2]; //v2
+    for(i = 0; i < num; i++) {
+        trig[(cur + i) * 3 + 0] = v[(i) * 3 + 0]; //v0
+        trig[(cur + i) * 3 + 1] = v[(i) * 3 + 1]; //v1
+        trig[(cur + i) * 3 + 2] = v[(i) * 3 + 2]; //v2
 
-        float v1_x = vertex[v[(i-1) * 3 + 1] * 3 + 0];
-        float v1_y = vertex[v[(i-1) * 3 + 1] * 3 + 1];
-        float v1_z = vertex[v[(i-1) * 3 + 1] * 3 + 2];
-        float v2_x = vertex[v[(i-1) * 3 + 2] * 3 + 0];
-        float v2_y = vertex[v[(i-1) * 3 + 2] * 3 + 1];
-        float v2_z = vertex[v[(i-1) * 3 + 2] * 3 + 2];
-        float v0_x = vertex[v[(i-1) * 3 + 0] * 3 + 0];
-        float v0_y = vertex[v[(i-1) * 3 + 0] * 3 + 1];
-        float v0_z = vertex[v[(i-1) * 3 + 0] * 3 + 2];
+        float v1_x = vertex[v[(i) * 3 + 1] * 3 + 0];
+        float v1_y = vertex[v[(i) * 3 + 1] * 3 + 1];
+        float v1_z = vertex[v[(i) * 3 + 1] * 3 + 2];
+        float v2_x = vertex[v[(i) * 3 + 2] * 3 + 0];
+        float v2_y = vertex[v[(i) * 3 + 2] * 3 + 1];
+        float v2_z = vertex[v[(i) * 3 + 2] * 3 + 2];
+        float v0_x = vertex[v[(i) * 3 + 0] * 3 + 0];
+        float v0_y = vertex[v[(i) * 3 + 0] * 3 + 1];
+        float v0_z = vertex[v[(i) * 3 + 0] * 3 + 2];
 
         float u1 = v1_x - v0_x;
         float u2 = v1_y - v0_y;
@@ -48,9 +49,13 @@ ptrn add_element(const int * v, int num, int * trig, int * size, int cur, float 
         float v2 = v2_y - v0_y;
         float v3 = v2_z - v0_z;
 
-        normal[(cur + i) * 3 + 0] = u2 * v3 - u3 * v2;
-        normal[(cur + i) * 3 + 1] = u3 * v1 - u1 * v3;
-        normal[(cur + i) * 3 + 2] = u1 * v2 - u2 * v1;
+        float x = u2 * v3 - u3 * v2;
+        float y = u3 * v1 - u1 * v3;
+        float z = u1 * v2 - u2 * v1;
+
+        normal[(cur + i) * 3 + 0] = x / sqrt(x * x + y * y + z * z);
+        normal[(cur + i) * 3 + 1] = y / sqrt(x * x + y * y + z * z);
+        normal[(cur + i) * 3 + 2] = z / sqrt(x * x + y * y + z * z);
     }
     cur = cur + num;
 
@@ -187,8 +192,8 @@ int load_off_mesh(FILE * fp, jmesh * jm) {
             fgets(line, MAX_SIZE, file);
             int eNum;
             int v[3];
-            float r, g, b, t;
-            int ret = sscanf(line, "%d %d %d %d %f %f %f %f", &eNum, &v[0], &v[1], &v[2], &r, &g, &b, &t);
+            //float r=0.0, g=0.0, b=0.0, t=0.0;
+            int ret = sscanf(line, "%d%d%d%d", &eNum, &v[0], &v[1], &v[2]);
             if(eNum == 3) {
                 if(ret >= eNum + 1) {
                     tempPt = add_element(v, eNum-2, tri, &triArrSize, triTotalCount, norm, vtx);
@@ -251,12 +256,14 @@ int load_off_mesh(FILE * fp, jmesh * jm) {
         }
 
     }
+    /*
     avg_x = sum_x / vertexCount;
     avg_y = sum_y / vertexCount;
     avg_z = sum_z / vertexCount;
     printf("Max_x: %f , Min_x: %f, Avg_x: %f \n", max_x, min_x, avg_x);
     printf("Max_y: %f , Min_y: %f, Avg_y: %f \n", max_y, min_y, avg_y);
     printf("Max_z: %f , Min_z: %f, Avg_z: %f \n", max_z, min_z, avg_z);
+     */
     return vertexCount;
 }//
 // Created by Derek Sun on 2019/2/14.

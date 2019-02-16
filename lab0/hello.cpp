@@ -6,14 +6,17 @@
 #include <string.h>
 #include <GLUT/glut.h>
 #include "utils.h"
+#include "offreader.h"
+#include "jmesh.h"
 
-int
-main(int argc, char **argv)
+GLfloat vtx[72][3];
+
+int main(int argc, char **argv)
 {
     graphics_state gs;
 
-    gs.height=512;
-    gs.width =512;
+    gs.height=1024;
+    gs.width =1024;
 
     /* check for command line arguments */
     if(argc != 2){
@@ -21,8 +24,18 @@ main(int argc, char **argv)
         exit(1);
     }
 
+    jmesh * vert = readOffFile("planets.off");
+    for(int i = 0; i < vert->nvert; i++) {
+        vtx[i][0] = vert->vertices[i * 3 + 0];
+        vtx[i][1] = vert->vertices[i * 3 + 1];
+        vtx[i][2] = vert->vertices[i * 3 + 2];
+    }
+    free_mesh(vert);
+
     gs.cubesize = strtod(argv[1], NULL);
     print_howto();
+
+    //printMesh(vert);
 
     { /* GLUT initialization */
         glutInit(&argc,argv);
@@ -38,7 +51,6 @@ main(int argc, char **argv)
         glutKeyboardFunc(keys);
         glutMouseFunc(mouse_handler);
         glutMotionFunc(trackMotion);
-
     }
 
     init(&gs);
@@ -47,4 +59,3 @@ main(int argc, char **argv)
 
     return 0;
 }
-
