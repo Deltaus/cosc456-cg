@@ -7,11 +7,14 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
+#include <ctime>
+#include <cmath>
 #include "utils.h"
 #include "offreader.h"
 #include "jmesh.h"
 
 //extern jmesh * vert;
+static int cnt=0;
 
 static graphics_state * current_gs;
 
@@ -64,13 +67,27 @@ void printMesh(const jmesh * mesh) {
     }
 }
 
+void myTimerFunc(int val){
+    cnt++;
+    if(cnt>=500)//上限500到了就清零
+        cnt=0;
+    display();
+    glutTimerFunc(100,myTimerFunc,0);//第一个参数设置成10，太小了刷新太快，不利于观察
+}
+
 void drawCube2(int speed, float dist, int index) {
+    if(index == 0) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glColor4f(0.0,0.0,0.0,0.5);
+    }
+    else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glColor4f(0.0, 0.82, 1.0, 0.5);
+    }
 
     glPushMatrix();
-        glColor4f(0.0,0.82,1.0,0.5);
-        glRotatef(speed,0.0,0.0,-1.0);
+        glRotatef(speed * cnt,0.0,0.0,1.0);
         glTranslatef(dist,0.0,0.0);
-
         glBegin(GL_QUADS);
              
             glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
@@ -245,19 +262,17 @@ void display(void){
 
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(1.0, 0.5, 0.0, 1.0);
-    glutWireCube(current_gs->cubesize);
+    //glutWireCube(current_gs->cubesize);
     glMatrixMode(GL_PROJECTION);
 
     glFrontFace(GL_CCW);
-    glPolygonMode(GL_FRONT, GL_FILL);
-    glPolygonMode(GL_BACK, GL_FILL);
 
     drawCube2(5, 0, 0); //sun
-    drawCube2(30,4, 1); //mer
-    drawCube2(25,6.5, 2); //ven
-    drawCube2(20, 9, 3); //earth
-    drawCube2(15, 10, 4); //mar
-    drawCube2(10, 12, 5); //jep
+    drawCube2(20,4, 1); //mer
+    drawCube2(15,6.5, 2); //ven
+    drawCube2(12, 9, 3); //earth
+    drawCube2(10, 10, 4); //mar
+    drawCube2(8, 12, 5); //jep
     drawCube2(5, 13, 6); //sat
     drawCube2(3, 14, 7); //ura
     drawCube2(1, 20, 8); //nep
@@ -283,6 +298,7 @@ reshape(int w, int h){
         glOrtho(-30.0*(GLfloat)w/(GLfloat)h,30.0*(GLfloat)w/(GLfloat)h,-30.0,30.0,-50.0,50.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    //gluLookAt(25, -25, 5, 5, 0, 0, 0, 0, 1);
 
 }
 

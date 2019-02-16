@@ -38,6 +38,7 @@ jmesh * readOffFile(const char * filename);
 void printMesh(const jmesh *);
 void drawCube2(int speed, float dist, int index);
 void drawTest();
+void myTimerFunc(int val);
 
 #ifdef __cplusplus
 }
