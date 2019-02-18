@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63e0b12a-7d13-4157-a4b1-d206f972c74c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/utils.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="63e0b12a-7d13-4157-a4b1-d206f972c74c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -253,12 +251,12 @@
       <workItem from="1550355551460" duration="667000" />
       <workItem from="1550356401988" duration="101000" />
       <workItem from="1550356521507" duration="139000" />
-      <workItem from="1550356854949" duration="1658000" />
+      <workItem from="1550356854949" duration="1799000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54012000" />
+    <option name="totallyTimeSpent" value="54153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
