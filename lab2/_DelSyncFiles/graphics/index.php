@@ -13,8 +13,6 @@
 <script type="text/javascript" src="js/arcball.js"></script>
 <script type="text/javascript" src="js/demo.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/sizeof.js"></script>
-<script type="text/javascript" src="../toji-gl-matrix/dist/gl-matrix.js"></script>>
 </head>
 <body>
 <canvas id="glcanvas">canvas not supported</canvas>
@@ -52,12 +50,12 @@
     varying vec3 interpBary;
 
     void main(void){
-        //change this from true to false and compare the differences
+    //change this from true to false and compare the differences
         bool antiAliasing = true;
         vec4 blue = vec4(0.0,0.5,1.0,1.0);
         vec4 white = vec4(1.0,1.0,1.0,1.0);
 
-        //  Advanced version
+    //  Advanced version
         //shader which draws anti-aliased edge lines on the mesh
         //uses fwidth and passed in barycentric coordinates
         if(antiAliasing){
@@ -67,7 +65,7 @@
             
             gl_FragColor = mix(blue,white,g);
         } 
-        //  Simple Version
+    //  Simple Version
         //This checks if the fragments are near the edge and colors blue if true
         //      and white if false
         //This shader exhibits aliasing which is why the edge lines appear jagged
@@ -87,22 +85,15 @@
 <script id="VertexShader1" type="x-shader/x-vertex">
     attribute vec3 vPos; //vertex position
     attribute vec3 bary; //barycentric
-    //attribute vec3 vNorm;
-
     varying vec3 interpBary;
+    
 
-    uniform mat4 uMVMatrix; //modelviewmatrix
-    uniform mat4 uPMatrix;  //projectionmatrix
-    //uniform mat4 uNMatrixl; //normalmatrix
-
-    //mat4 scale = mat4(2.0,0.0,0.0,0.0; 0.0,2.0,0.0,0.0; 0.0,0.0,2.0,0.0; 0.0,0.0,0.0,1.0);
+    uniform mat4 uMVMatrix;//modelviewmatrix
+    uniform mat4 uPMatrix;//projectionmatrix
 
     void main(void) {
         interpBary = bary;
-        vec4 temp = vec4(vPos, 1.0);
-        temp.x *= 2.0;
-        temp.y *= 1.3;
-        gl_Position = uPMatrix * uMVMatrix * temp;
+        gl_Position = uPMatrix * uMVMatrix * vec4(vPos, 1.0);
     }
 </script>
 
@@ -117,10 +108,6 @@
     //call the main mesh Loading function; main.js
     executeMainLoop(filename); 
 </script>
-
-<p id="test">
-"really"
-</p>
 
 </body>
 </html>

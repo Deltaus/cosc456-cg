@@ -7,10 +7,7 @@ function executeMainLoop(filename){
 }
 
 //function to load the mesh and setup the opengl rendering demo
-function  processMesh(data){
-
-    this.testFunc();
-
+function processMesh(data){
     if(data.target != undefined){
         var mesh = {model: new modelLoader.Mesh(data.target.result)}
     } else {
