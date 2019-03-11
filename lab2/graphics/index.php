@@ -50,6 +50,7 @@
 
     precision mediump float;
     varying vec3 interpBary;
+    varying vec3 lighting;
 
     void main(void){
         //change this from true to false and compare the differences
@@ -65,14 +66,15 @@
             vec3 smoothdF = smoothstep(vec3(0.0),dF, interpBary);
             float g = min(min(smoothdF.x,smoothdF.y),smoothdF.z);
             
-            gl_FragColor = mix(blue,white,g);
+            //gl_FragColor = mix(blue,white,g);
+            gl_FragColor = vec4(lighting, 1.0);
         } 
         //  Simple Version
         //This checks if the fragments are near the edge and colors blue if true
         //      and white if false
         //This shader exhibits aliasing which is why the edge lines appear jagged
         else {
-            if(any(lessThan(interpBary,vec3(0.02)))){
+            if(any(lessThan(interpBary,vec3(0.01)))){
                 gl_FragColor = blue;
             }
             else {
@@ -87,22 +89,26 @@
 <script id="VertexShader1" type="x-shader/x-vertex">
     attribute vec3 vPos; //vertex position
     attribute vec3 bary; //barycentric
-    //attribute vec3 vNorm;
+    attribute vec3 vNorm;
 
     varying vec3 interpBary;
+    varying vec3 lighting;
 
     uniform mat4 uMVMatrix; //modelviewmatrix
     uniform mat4 uPMatrix;  //projectionmatrix
-    //uniform mat4 uNMatrixl; //normalmatrix
+    uniform mat4 uNMatrixl; //normalmatrix
 
     //mat4 scale = mat4(2.0,0.0,0.0,0.0; 0.0,2.0,0.0,0.0; 0.0,0.0,2.0,0.0; 0.0,0.0,0.0,1.0);
 
+
     void main(void) {
         interpBary = bary;
-        vec4 temp = vec4(vPos, 1.0);
-        temp.x *= 2.0;
-        temp.y *= 1.3;
-        gl_Position = uPMatrix * uMVMatrix * temp;
+        //vec4 temp = vec4(vPos, 1.0);
+        //temp.x *= 2.0;
+        //temp.y *= 1.3;
+        gl_Position = uPMatrix * uMVMatrix * vec4(vPos, 1.0);
+        //light:
+        lighting = vNorm * 0.5 + 0.5;
     }
 </script>
 
@@ -117,10 +123,6 @@
     //call the main mesh Loading function; main.js
     executeMainLoop(filename); 
 </script>
-
-<p id="test">
-"really"
-</p>
 
 </body>
 </html>

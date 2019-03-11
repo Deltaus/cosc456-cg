@@ -223,7 +223,3 @@ function computeNorms(verts, packed, vFaces) {
 
     return normsVert;
 }
-
-function testFunc() {
-    document.getElementById("test").innerHTML = 'HAHA';
-}

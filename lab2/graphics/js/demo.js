@@ -4,11 +4,11 @@ var GC = {};   //the graphics context
 
 //initialize the graphics context variables
 GC.shaderProgram = null;          //our GLSL program
+
 GC.vertexPositionAttribute = null;//location of vertex positions in GLSL program
+
 GC.barycentricBuffer = null;      //array passed to shader to create wireframe display
 GC.barycentricAttribute = null;   //location of barycentric coordinate array in GLSL program
-
-GC.vertexNormalAttribute = null;
 
 GC.perspectiveMatrix = null;      //the Perspective matrix
 GC.mvMatrix = null;               //the ModelView matrix
@@ -17,6 +17,9 @@ GC.mesh = null;                   //the current mesh
 GC.mouseDown = null;              //boolean check for mouseDown
 GC.width = 640;                   //render area width
 GC.height = 480;                  //render area height
+
+GC.vertexNormalBuffer = null;
+GC.vertexNormalAttribute = null;
 
 var camera = new ArcBall();              //create a new arcball camera
 camera.setBounds(GC.width,GC.height);    //initialize camera with screen space dimensions
@@ -107,10 +110,8 @@ demo.prototype.initShaders = function(){
     GC.barycentricAttribute = gl.getAttribLocation(this.shaderProgram, "bary");
     gl.enableVertexAttribArray(GC.barycentricAttribute);
 
-    /*
     GC.vertexNormalAttribute = gl.getAttribLocation(this.shaderProgram, "vNorm");
     gl.enableVertexAttribArray(GC.vertexNormalAttribute);
-    */
 
     GC.shaderProgram = this.shaderProgram;
 }
@@ -126,30 +127,20 @@ demo.prototype.initGeometryBuffers = function(){
   var bary = [];                    //array of 1s and 0s passed to GLSL to draw wireframe
   var min = [90000,90000,90000];    //used for bounding box calculations
   var max = [-90000,-90000,-90000]; //used for bounding box calculations
-  //var norms1 = [];
-  var norms2 = [];
+
+    var norms = [];
+
+    m.normals.forEach(function (i) {
+        norms.push(i);
+    })
 
     // Loop through the indices array and create a vertices array (this means
     //     duplicating data) from the listed indices
-    var k;
-    /*
-    for(k = 0; k < (m.normals.length / 3); k++) {
-        var v = vec3(m.normals[k * 3 + 0], m.normals[k * 3 + 1], m.normals[k * 3 + 2]);
-        norms1.push(v);
-    }
-    */
-
-    for(k = 0; k < m.normals.length; k++) {
-        norms2.push(m.normals[k]);
-    }
-    
-    
     m.indices.forEach(function(d,i){
         //grab the x,y,z values for the current vertex
         vx = (parseFloat(m.vertices[d*3]));
         vy = (parseFloat(m.vertices[d*3+1]));
         vz = (parseFloat(m.vertices[d*3+2]));
-        
 
         //add this vertex to our array
         verts.push(vx,vy,vz);
@@ -164,11 +155,11 @@ demo.prototype.initGeometryBuffers = function(){
 
         //What does this do?
         if(i%3 == 0){
-            bary.push(1,0,0);
+            bary.push(0,0,0);
         } else if(i % 3 == 1){
-            bary.push(0,1,0);
+            bary.push(0,0,0);
         } else if(i % 3 == 2){
-            bary.push(0,0,1);
+            bary.push(0,0,0);
         }
     });
 
@@ -194,16 +185,16 @@ demo.prototype.initGeometryBuffers = function(){
   gl.bindBuffer(gl.ARRAY_BUFFER, GC.barycentricBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bary), gl.STATIC_DRAW);
 
-  /*
-  m.normBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, m.normBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(norms2), gl.STATIC_DRAW);
-  */
-
   m.vertexBuffer = gl.createBuffer();
   //bind the data we placed in the verts array to an OpenGL buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, m.vertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+
+
+  GC.vertexNormalBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, m.vertexNormalBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(norms), gl.STATIC_DRAW);
+
 }
 
 //the drawing function
@@ -242,15 +233,12 @@ function drawScene(){
     gl.vertexAttribPointer(GC.vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
 
     //pass the barycentric coords to the shader for edge detection
-
     gl.bindBuffer(gl.ARRAY_BUFFER, GC.barycentricBuffer);
     gl.vertexAttribPointer(GC.barycentricAttribute, 3, gl.FLOAT, false, 0, 0);
 
 
-    /*
-    gl.bindBuffer(gl.ARRAY_BUFFER, m.normBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, GC.vertexNormalBuffer);
     gl.vertexAttribPointer(GC.vertexNormalAttribute, 3, gl.FLOAT, false, 0, 0);
-    */
 
     //draw everything
     gl.drawArrays(gl.TRIANGLES,0,m.indices.length);
@@ -360,6 +348,7 @@ demo.prototype.mouseWheel = function(event){
     return false;
 }
 
+
 //--------- handle keyboard events
 demo.prototype.keyDown = function(e){
     camera.LastRot = camera.ThisRot;
@@ -388,6 +377,7 @@ demo.prototype.keyDown = function(e){
     //redraw
     drawScene();
 }
+
 
 // --------- handle touch events
 demo.prototype.touchDown = function(event){

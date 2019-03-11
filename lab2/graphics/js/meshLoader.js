@@ -19,7 +19,7 @@ modelLoader.Mesh = function( objectData ){
 
     //var norms;
     //vertex and its corresponding faces;
-    var verFaces = {};
+    this.verFaces = new Array();
     var faceCount = 0;
     
     // array of lines separated by the newline
@@ -50,23 +50,28 @@ modelLoader.Mesh = function( objectData ){
             var i2 = line[j].split('/')[0] - 1;
             var i3 = line[j+1].split('/')[0] - 1;
             packed.indices.push(i1,i2,i3);
-            if(i1 in verFaces) {
-                verFaces[i1].push(faceCount)
+
+            console.log("OUT");
+            if(i1 in this.verFaces) {
+                this.verFaces[i1].push(faceCount)
             }
             else {
-                verFaces[i1] = [faceCount];
+                this.verFaces[i1] = [faceCount];
+                console.log("IN");
             }
-            if(i2 in verFaces) {
-                verFaces[i2].push(faceCount)
-            }
-            else {
-                verFaces[i2] = [faceCount];
-            }
-            if(i3 in verFaces) {
-                verFaces[i3].push(faceCount)
+
+            if(i2 in this.verFaces) {
+                this.verFaces[i2].push(faceCount)
             }
             else {
-                verFaces[i3] = [faceCount];
+                this.verFaces[i2] = [faceCount];
+            }
+
+            if(i3 in this.verFaces) {
+                this.verFaces[i3].push(faceCount)
+            }
+            else {
+                this.verFaces[i3] = [faceCount];
             }
         }
         faceCount++;
@@ -74,9 +79,7 @@ modelLoader.Mesh = function( objectData ){
     }
     this.vertices = verts;
     this.indices = packed.indices;
-    this.verFaces = verFaces;
-    this.normals = computeNorms(this.vertices, this.packed.indices, this.verFaces);
-    console.log(this.normals[0]);
-    console.log('SHOW HERE');
-    document.getElementById("test").innerHTML = 'HAHA';
+
+    //this.verFaces = verFaces;
+    this.normals = computeNorms(this.vertices, this.indices, this.verFaces);
 }
