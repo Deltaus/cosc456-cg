@@ -16,11 +16,6 @@ modelLoader.Mesh = function( objectData ){
     // unpacking stuff
     var packed = {};
     packed.indices = [];
-
-    //var norms;
-    //vertex and its corresponding faces;
-    this.verFaces = new Array();
-    var faceCount = 0;
     
     // array of lines separated by the newline
     var lines = objectData.split( '\n' )
@@ -43,43 +38,15 @@ modelLoader.Mesh = function( objectData ){
       }
       // if this is a face
       else if( lines[ i ].startsWith( 'f ' ) ){
-
         line = lines[ i ].slice( 2 ).split( " " );
         for(var j=1; j <= line.length-2; j++){
             var i1 = line[0].split('/')[0] - 1;
             var i2 = line[j].split('/')[0] - 1;
             var i3 = line[j+1].split('/')[0] - 1;
             packed.indices.push(i1,i2,i3);
-
-            //console.log("OUT");
-            if(i1 in this.verFaces) {
-                this.verFaces[i1].push(faceCount)
-            }
-            else {
-                this.verFaces[i1] = [faceCount];
-                //console.log("IN");
-            }
-
-            if(i2 in this.verFaces) {
-                this.verFaces[i2].push(faceCount)
-            }
-            else {
-                this.verFaces[i2] = [faceCount];
-            }
-
-            if(i3 in this.verFaces) {
-                this.verFaces[i3].push(faceCount)
-            }
-            else {
-                this.verFaces[i3] = [faceCount];
-            }
         }
-        faceCount++;
       }
     }
     this.vertices = verts;
     this.indices = packed.indices;
-
-    //this.verFaces = verFaces;
-    this.normals = computeNorms(this.vertices, this.indices, this.verFaces);
 }

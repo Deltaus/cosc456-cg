@@ -7,8 +7,8 @@ GC.shaderProgram = null;          //our GLSL program
 
 GC.vertexPositionAttribute = null;//location of vertex positions in GLSL program
 
-//GC.barycentricBuffer = null;      //array passed to shader to create wireframe display
-//GC.barycentricAttribute = null;   //location of barycentric coordinate array in GLSL program
+GC.barycentricBuffer = null;      //array passed to shader to create wireframe display
+GC.barycentricAttribute = null;   //location of barycentric coordinate array in GLSL program
 
 GC.perspectiveMatrix = null;      //the Perspective matrix
 GC.mvMatrix = null;               //the ModelView matrix
@@ -18,8 +18,10 @@ GC.mouseDown = null;              //boolean check for mouseDown
 GC.width = 640;                   //render area width
 GC.height = 480;                  //render area height
 
+/*
 GC.vertexNormalBuffer = null;
 GC.vertexNormalAttribute = null;
+*/
 
 var camera = new ArcBall();              //create a new arcball camera
 camera.setBounds(GC.width,GC.height);    //initialize camera with screen space dimensions
@@ -105,8 +107,13 @@ demo.prototype.initShaders = function(){
     gl.useProgram(this.shaderProgram);
 
     GC.vertexPositionAttribute = gl.getAttribLocation(this.shaderProgram, "vPos");
+    gl.enableVertexAttribArray(GC.vertexPositionAttribute);
 
-    GC.vertexNormalAttribute = gl.getAttribLocation(this.shaderProgram, "vNorm");
+    GC.barycentricAttribute = gl.getAttribLocation(this.shaderProgram, "bary");
+    gl.enableVertexAttribArray(GC.barycentricAttribute);
+
+    //GC.vertexNormalAttribute = gl.getAttribLocation(this.shaderProgram, "vNorm");
+    //gl.enableVertexAttribArray(GC.vertexNormalAttribute);
 
     GC.shaderProgram = this.shaderProgram;
 }
@@ -114,14 +121,26 @@ demo.prototype.initShaders = function(){
 //initialize the buffers for drawing and the edge highlights
 demo.prototype.initGeometryBuffers = function(){
   var m = GC.mesh.model;
+
+  //create an OpenGL buffer
+  GC.barycentricBuffer = gl.createBuffer();
   
   var verts = [];                   //array to hold vertices laid out according to indices
-  var norms = [];                    //array of 1s and 0s passed to GLSL to draw wireframe
+  var bary = [];                    //array of 1s and 0s passed to GLSL to draw wireframe
   var min = [90000,90000,90000];    //used for bounding box calculations
   var max = [-90000,-90000,-90000]; //used for bounding box calculations
 
+    /*
+    var norms = [];
 
-    m.indices.forEach(function(d){
+    m.normals.forEach(function (i) {
+        norms.push(i);
+    })
+    */
+
+    // Loop through the indices array and create a vertices array (this means
+    //     duplicating data) from the listed indices
+    m.indices.forEach(function(d,i){
         //grab the x,y,z values for the current vertex
         vx = (parseFloat(m.vertices[d*3]));
         vy = (parseFloat(m.vertices[d*3+1]));
@@ -138,19 +157,15 @@ demo.prototype.initGeometryBuffers = function(){
         if(vy > max[1]) max[1] = vy;
         if(vz > max[2]) max[2] = vz;
 
-        nx = m.normals[d*3];
-        ny = m.normals[d*3+1];
-        nz = m.normals[d*3+2];
-
-        if(isNaN(nx) || isNaN(ny) || isNaN(nz)) {
-            nx = 1;
-            ny = 0;
-            nz = 0;
+        //What does this do?
+        if(i%3 == 0){
+            bary.push(0,0,0);
+        } else if(i % 3 == 1){
+            bary.push(0,0,0);
+        } else if(i % 3 == 2){
+            bary.push(0,0,0);
         }
-
-        norms.push(nx, ny, nz);
     });
-
 
     //set the min/max variables
   m.minX = min[0]; m.minY = min[1]; m.minZ = min[2];
@@ -170,14 +185,21 @@ demo.prototype.initGeometryBuffers = function(){
   //orient the camera to look at the center of the model
   camera.lookAt = [(m.minX+m.maxX)/2.0,(m.minY+m.maxY)/2.0,(m.minZ+m.maxZ)/2.0];
 
-  GC.vertexNormalBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, GC.vertexNormalBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(norms), gl.STATIC_DRAW);
+  //bind the data we placed in the bary array to an OpenGL buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, GC.barycentricBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bary), gl.STATIC_DRAW);
 
   m.vertexBuffer = gl.createBuffer();
   //bind the data we placed in the verts array to an OpenGL buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, m.vertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+
+
+  /*
+  GC.vertexNormalBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, m.vertexNormalBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(norms), gl.STATIC_DRAW);
+  */
 
 }
 
@@ -213,16 +235,21 @@ function drawScene(){
     setMatrixUniforms(GC);
 
     //pass the vertex buffer to the shader
-    gl.enableVertexAttribArray(GC.vertexPositionAttribute);
     gl.bindBuffer(gl.ARRAY_BUFFER, m.vertexBuffer);
     gl.vertexAttribPointer(GC.vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
 
-    gl.enableVertexAttribArray(GC.vertexNormalAttribute);
+    //pass the barycentric coords to the shader for edge detection
+    gl.bindBuffer(gl.ARRAY_BUFFER, GC.barycentricBuffer);
+    gl.vertexAttribPointer(GC.barycentricAttribute, 3, gl.FLOAT, false, 0, 0);
+
+
+    /*
     gl.bindBuffer(gl.ARRAY_BUFFER, GC.vertexNormalBuffer);
     gl.vertexAttribPointer(GC.vertexNormalAttribute, 3, gl.FLOAT, false, 0, 0);
+    */
 
     //draw everything
-    gl.drawArrays(gl.TRIANGLES,0, m.indices.length);
+    gl.drawArrays(gl.TRIANGLES,0,m.indices.length);
 }
 
 //initialize webgl

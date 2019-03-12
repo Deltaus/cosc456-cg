@@ -51,13 +51,14 @@ modelLoader.Mesh = function( objectData ){
             var i3 = line[j+1].split('/')[0] - 1;
             packed.indices.push(i1,i2,i3);
 
-            //console.log("OUT");
+            // console.log("OUT");
+
             if(i1 in this.verFaces) {
                 this.verFaces[i1].push(faceCount)
             }
             else {
                 this.verFaces[i1] = [faceCount];
-                //console.log("IN");
+               // console.log("IN");
             }
 
             if(i2 in this.verFaces) {
@@ -73,13 +74,12 @@ modelLoader.Mesh = function( objectData ){
             else {
                 this.verFaces[i3] = [faceCount];
             }
+
         }
         faceCount++;
       }
     }
     this.vertices = verts;
     this.indices = packed.indices;
-
-    //this.verFaces = verFaces;
-    this.normals = computeNorms(this.vertices, this.indices, this.verFaces);
+    //this.normals = computeNorms(this.vertices, this.indices, this.verFaces);
 }

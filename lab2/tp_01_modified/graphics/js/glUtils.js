@@ -162,40 +162,6 @@ function makeOrtho(left, right, bottom, top, znear, zfar)
            [0, 0, 0, 1]]);
 }
 
-
-function accAdd(arg1,arg2){
-    var r1,r2,m;
-    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}
-    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}
-    m=Math.pow(10,Math.max(r1,r2))
-    return (arg1*m+arg2*m)/m
-}
-
-function accSub(arg1,arg2){
-    return accAdd(arg1,-arg2);
-}
-
-
-function accMul(arg1,arg2)
-{
-    var m=0,s1=arg1.toString(),s2=arg2.toString();
-    try{m+=s1.split(".")[1].length}catch(e){}
-    try{m+=s2.split(".")[1].length}catch(e){}
-    return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)
-}
-
-
-function accDiv(arg1,arg2){
-    var t1=0,t2=0,r1,r2;
-    try{t1=arg1.toString().split(".")[1].length}catch(e){}
-    try{t2=arg2.toString().split(".")[1].length}catch(e){}
-    with(Math){
-        r1=Number(arg1.toString().replace(".",""))
-        r2=Number(arg2.toString().replace(".",""))
-        return (r1/r2)*pow(10,t2-t1);
-    }
-}
-
 function computeNorms(verts, packed, vFaces) {
 
     var i;
@@ -213,20 +179,20 @@ function computeNorms(verts, packed, vFaces) {
         var v0_y = verts[packed[i * 3 + 0] * 3 + 1];
         var v0_z = verts[packed[i * 3 + 0] * 3 + 2];
 
-        var u1 = accSub(v1_x, v0_x);
-        var u2 = accSub(v1_y, v0_y);
-        var u3 = accSub(v1_z, v0_z);
-        var v1 = accSub(v2_x, v0_x);
-        var v2 = accSub(v2_y, v0_y);
-        var v3 = accSub(v2_z, v0_z);
+        var u1 = v1_x - v0_x;
+        var u2 = v1_y - v0_y;
+        var u3 = v1_z - v0_z;
+        var v1 = v2_x - v0_x;
+        var v2 = v2_y - v0_y;
+        var v3 = v2_z - v0_z;
 
-        var x = accSub(accMul(u2, v3), accMul(u3, v2));
-        var y = accSub(accMul(u3, v1), accMul(u1, v3));
-        var z = accSub(accMul(u1, v2), accMul(u2, v1));
+        var x = u2 * v3 - u3 * v2;
+        var y = u3 * v1 - u1 * v3;
+        var z = u1 * v2 - u2 * v1;
 
-        normsFaces.push(accDiv(x, Math.sqrt(accMul(x, x) + accMul(y, y) + accMul(z, z))));
-        normsFaces.push(accDiv(y, Math.sqrt(accMul(x, x) + accMul(y, y) + accMul(z, z))));
-        normsFaces.push(accDiv(z, Math.sqrt(accMul(x, x) + accMul(y, y) + accMul(z, z))));
+        normsFaces.push(x / Math.sqrt(x * x + y * y + z * z));
+        normsFaces.push(y / Math.sqrt(x * x + y * y + z * z));
+        normsFaces.push(z / Math.sqrt(x * x + y * y + z * z));
     }
 
     for(i = 0; i < (verts.length / 3); i++) {
@@ -244,15 +210,15 @@ function computeNorms(verts, packed, vFaces) {
         var f2_y = normsFaces[f2 * 3 + 1];
         var f2_z = normsFaces[f2 * 3 + 2];
 
-        var v_x = accDiv((f0_x + f1_x + f2_x), 3.0);
-        var v_y = accDiv((f0_y + f1_y + f2_y), 3.0);
-        var v_z = accDiv((f0_z + f1_z + f2_z), 3.0);
+        var v_x = (f0_x + f1_x + f2_x) / 3;
+        var v_y = (f0_y + f1_y + f2_y) / 3;
+        var v_z = (f0_z + f1_z + f2_z) / 3;
 
-        var md = Math.sqrt(accAdd(accAdd(accMul(v_x, v_x), accMul(v_y, v_y)), accMul(v_z, v_z)));
+        var md = Math.sqrt(v_x * v_x + v_y * v_y + v_z * v_z);
 
-        normsVert.push(accDiv(v_x, md));
-        normsVert.push(accDiv(v_y, md));
-        normsVert.push(accDiv(v_z, md));
+        normsVert.push(v_x / md);
+        normsVert.push(v_y / md);
+        normsVert.push(v_z / md);
     }
 
     return normsVert;

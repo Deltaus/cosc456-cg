@@ -1,4 +1,5 @@
-<? php ?>
+<?php
+?>
 <html>
 <head>
 <meta charset="utf-8">
@@ -12,8 +13,6 @@
 <script type="text/javascript" src="js/arcball.js"></script>
 <script type="text/javascript" src="js/demo.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/sizeof.js"></script>
-<script type="text/javascript" src="../toji-gl-matrix/dist/gl-matrix.js"></script>>
 </head>
 <body>
 <canvas id="glcanvas">canvas not supported</canvas>
@@ -48,33 +47,35 @@
     #endif
 
     precision mediump float;
-    varying vec4 lighting;
+    varying vec3 interpBary;
 
     void main(void){
-        //change this from true to false and compare the differences
+    //change this from true to false and compare the differences
         bool antiAliasing = true;
         vec4 blue = vec4(0.0,0.5,1.0,1.0);
         vec4 white = vec4(1.0,1.0,1.0,1.0);
 
-        //  Advanced version
+    //  Advanced version
         //shader which draws anti-aliased edge lines on the mesh
         //uses fwidth and passed in barycentric coordinates
         if(antiAliasing){
-            gl_FragColor = lighting;
+            vec3 dF = fwidth(interpBary);
+            vec3 smoothdF = smoothstep(vec3(0.0),dF, interpBary);
+            float g = min(min(smoothdF.x,smoothdF.y),smoothdF.z);
+            
+            gl_FragColor = mix(blue,white,g);
         } 
-        //  Simple Version
+    //  Simple Version
         //This checks if the fragments are near the edge and colors blue if true
         //      and white if false
         //This shader exhibits aliasing which is why the edge lines appear jagged
         else {
-            /*
-            if(any(lessThan(interpBary,vec3(0.01)))){
+            if(any(lessThan(interpBary,vec3(0.02)))){
                 gl_FragColor = blue;
             }
             else {
                 gl_FragColor = white;
             }
-            */
         }
     }
 
@@ -83,18 +84,16 @@
 <!-- Vertex Shader -->
 <script id="VertexShader1" type="x-shader/x-vertex">
     attribute vec3 vPos; //vertex position
-    attribute vec3 vNorm;
+    attribute vec3 bary; //barycentric
+    varying vec3 interpBary;
+    
 
-    varying vec4 lighting;
-
-    uniform mat4 uMVMatrix; //modelviewmatrix
-    uniform mat4 uPMatrix;  //projectionmatrix
-    uniform mat4 uNMatrixl; //normalmatrix
+    uniform mat4 uMVMatrix;//modelviewmatrix
+    uniform mat4 uPMatrix;//projectionmatrix
 
     void main(void) {
+        interpBary = bary;
         gl_Position = uPMatrix * uMVMatrix * vec4(vPos, 1.0);
-        //light:
-        lighting = vec4(vNorm, 1.0) * 0.5 + 0.5;
     }
 </script>
 

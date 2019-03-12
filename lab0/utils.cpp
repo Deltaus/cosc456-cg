@@ -75,18 +75,18 @@ void myTimerFunc(int val){
     glutTimerFunc(100,myTimerFunc,0);//第一个参数设置成10，太小了刷新太快，不利于观察
 }
 
-void drawCube2(int speed, float dist, int index) {
+void drawCube2(float speed, float dist, int index) {
     if(index == 0) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glColor4f(0.0,0.0,0.0,0.5);
     }
     else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glColor4f(0.0, 0.82, 1.0, 0.5);
+        glColor4f(0.0, 0.25, 0.5, 0.5);
     }
 
     glPushMatrix();
-        glRotatef(speed * cnt,0.0,0.0,1.0);
+        glRotatef(speed / 2.0 * cnt,0.0,0.0,1.0);
         glTranslatef(dist,0.0,0.0);
         glBegin(GL_QUADS);
              
@@ -126,11 +126,11 @@ void drawCube2(int speed, float dist, int index) {
             glVertex3f(vtx[index*8+2][0],vtx[index*8+2][1],vtx[index*8+2][2]);
 
      
-            glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
+            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
     
             glVertex3f(vtx[index*8+5][0],vtx[index*8+5][1],vtx[index*8+5][2]);
       
-            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+            glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
        
             glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
 
@@ -158,14 +158,14 @@ void display(void){
     glFrontFace(GL_CCW);
 
     drawCube2(5, 0, 0); //sun
-    drawCube2(20,4, 1); //mer
-    drawCube2(15,6.5, 2); //ven
-    drawCube2(12, 9, 3); //earth
-    drawCube2(10, 10, 4); //mar
-    drawCube2(8, 12, 5); //jep
-    drawCube2(5, 13, 6); //sat
-    drawCube2(3, 14, 7); //ura
-    drawCube2(1, 20, 8); //nep
+    drawCube2(20,3, 1); //mer
+    drawCube2(15,5.5, 2); //ven
+    drawCube2(12, 8, 3); //earth
+    drawCube2(10, 10.5, 4); //mar
+    drawCube2(8, 16, 5); //jep
+    drawCube2(5, 19.5, 6); //sat
+    drawCube2(3, 23, 7); //ura
+    drawCube2(1, 27, 8); //nep
 
     //drawTest();
 
