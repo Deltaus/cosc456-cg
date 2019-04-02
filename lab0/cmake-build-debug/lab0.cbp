@@ -105,9 +105,6 @@
 		<Unit filename="/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/offreader.h">
 			<Option target="lab0"/>
 		</Unit>
-		<Unit filename="/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/planets.off">
-			<Option target="lab0"/>
-		</Unit>
 		<Unit filename="/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/utils.cpp">
 			<Option target="lab0"/>
 		</Unit>

@@ -5,6 +5,11 @@
 #ifndef LAB0_UTILS_H
 #define LAB0_UTILS_H
 
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 #include "jmesh.h"
 
 typedef struct {
@@ -39,6 +44,7 @@ void printMesh(const jmesh *);
 void drawCube2(float speed, float dist, int index);
 void drawTest();
 void myTimerFunc(int val);
+void saveToPPM();
 
 #ifdef __cplusplus
 }

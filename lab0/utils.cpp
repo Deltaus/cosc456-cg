@@ -4,6 +4,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <cstdio>
+#include <string>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
@@ -89,59 +91,61 @@ void drawCube2(float speed, float dist, int index) {
         glRotatef(speed / 2.0 * cnt,0.0,0.0,1.0);
         glTranslatef(dist,0.0,0.0);
         glBegin(GL_QUADS);
-             
+
+            glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
+
             glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
-    
-            glVertex3f(vtx[index*8+3][0],vtx[index*8+3][1],vtx[index*8+3][2]);
-      
-            glVertex3f(vtx[index*8+7][0],vtx[index*8+7][1],vtx[index*8+7][2]);
        
             glVertex3f(vtx[index*8+5][0],vtx[index*8+5][1],vtx[index*8+5][2]);
 
-        
+            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+
+
+            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+
             glVertex3f(vtx[index*8+5][0],vtx[index*8+5][1],vtx[index*8+5][2]);
-        
-            glVertex3f(vtx[index*8+7][0],vtx[index*8+7][1],vtx[index*8+7][2]);
          
             glVertex3f(vtx[index*8+6][0],vtx[index*8+6][1],vtx[index*8+6][2]);
-          
-            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+
+            glVertex3f(vtx[index*8+7][0],vtx[index*8+7][1],vtx[index*8+7][2]);
 
      
             glVertex3f(vtx[index*8+7][0],vtx[index*8+7][1],vtx[index*8+7][2]);
-    
-            glVertex3f(vtx[index*8+3][0],vtx[index*8+3][1],vtx[index*8+3][2]);
+
+            glVertex3f(vtx[index*8+6][0],vtx[index*8+6][1],vtx[index*8+6][2]);
       
             glVertex3f(vtx[index*8+2][0],vtx[index*8+2][1],vtx[index*8+2][2]);
-       
-            glVertex3f(vtx[index*8+6][0],vtx[index*8+6][1],vtx[index*8+6][2]);
+
+            glVertex3f(vtx[index*8+3][0],vtx[index*8+3][1],vtx[index*8+3][2]);
 
         
             glVertex3f(vtx[index*8+3][0],vtx[index*8+3][1],vtx[index*8+3][2]);
+
+            glVertex3f(vtx[index*8+2][0],vtx[index*8+2][1],vtx[index*8+2][2]);
         
             glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
          
             glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
-          
+
+
+            glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
+
             glVertex3f(vtx[index*8+2][0],vtx[index*8+2][1],vtx[index*8+2][2]);
 
-     
-            glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+            glVertex3f(vtx[index*8+6][0],vtx[index*8+6][1],vtx[index*8+6][2]);
     
             glVertex3f(vtx[index*8+5][0],vtx[index*8+5][1],vtx[index*8+5][2]);
-      
-            glVertex3f(vtx[index*8+1][0],vtx[index*8+1][1],vtx[index*8+1][2]);
-       
-            glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
 
-        
-            glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
-        
-            glVertex3f(vtx[index*8+2][0],vtx[index*8+2][1],vtx[index*8+2][2]);
-         
-            glVertex3f(vtx[index*8+6][0],vtx[index*8+6][1],vtx[index*8+6][2]);
-          
+
             glVertex3f(vtx[index*8+4][0],vtx[index*8+4][1],vtx[index*8+4][2]);
+
+            glVertex3f(vtx[index*8+7][0],vtx[index*8+7][1],vtx[index*8+7][2]);
+
+            glVertex3f(vtx[index*8+3][0],vtx[index*8+3][1],vtx[index*8+3][2]);
+
+            glVertex3f(vtx[index*8+0][0],vtx[index*8+0][1],vtx[index*8+0][2]);
+          
+
         glEnd();
 
     glPopMatrix();
@@ -174,6 +178,47 @@ void display(void){
 
 }
 
+void saveToPPM() {
+
+    GLint width = glutGet(GLUT_WINDOW_WIDTH);
+    GLint height = glutGet(GLUT_WINDOW_HEIGHT);
+    int maxColorVal = 255;
+    FILE * fd = fopen("./screenshot.ppm", "wt");
+
+    printf("wid %d hgt %d \n", width, height);
+    printf("Allocating \n");
+    GLubyte * pixels = (GLubyte *)malloc(sizeof(GLubyte) * 3 * width * height);
+    if(pixels == NULL) {
+        printf("Allocation failed");
+        return;
+    }
+
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+    glReadPixels(0,0,width,height,GL_RGB,GL_UNSIGNED_BYTE,pixels);
+
+    /*
+    char headBuffer[256];
+    sprintf(headBuffer,"P6\n%d %d\n%d\n",width,height,maxColorVal);
+    write(fd,headBuffer,strlen(headBuffer));
+     */
+    fprintf(fd, "P3\n");
+    fprintf(fd, "%d %d\n", width, height);
+    fprintf(fd, "%d\n", maxColorVal);
+
+    int x;
+    int y;
+
+    for(y = height - 1; y >= 0; y--) {
+        for (x=0; x < width; x++) {
+            fprintf(fd, "%u %u %u ", (unsigned int)pixels[(y*width+x)*3 + 0], (unsigned int)pixels[(y*width+x)*3 + 1], (unsigned int)pixels[(y*width+x)*3 + 2]);
+        }
+        fprintf(fd, "\n");
+    }
+
+    fclose(fd);
+    free(pixels);
+}
+
 void
 reshape(int w, int h){
 
@@ -188,7 +233,7 @@ reshape(int w, int h){
         glOrtho(-30.0*(GLfloat)w/(GLfloat)h,30.0*(GLfloat)w/(GLfloat)h,-30.0,30.0,-50.0,50.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    //gluLookAt(25, -25, 5, 5, 0, 0, 0, 0, 1);
+    gluLookAt(25, 25, 5, 0, 0, 0, 0, 1, 0);
 
 }
 
@@ -212,7 +257,7 @@ keys(unsigned char c, int x, int y) {
             break;
         case 's':
         case 'S':
-            //
+            saveToPPM();
             break;
     }
 }

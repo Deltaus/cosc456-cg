@@ -180,7 +180,7 @@ int load_off_mesh(FILE * fp, jmesh * jm) {
                 sum_z += vtx[vtxCount * 3 + 2];
             }
             if(ret != 3) {
-                printf("Read Error!)");
+                printf("Read Error!");
                 exit(1);
             }
             lineCount++;
@@ -218,16 +218,21 @@ int load_off_mesh(FILE * fp, jmesh * jm) {
                 int length = (eNum - 2) * 3;
                 int vtxReformed[length];
                 //int gp = 0;
+                int * vv2 = (int*)malloc(sizeof(int) * (eNum));
+                int k;
+                for(k = 1; k < eNum+1; k++) {
+                    vv2[k-1] = vv[k] + 1;
+                }
                 int i;
                 for(i = 0; i < length; i++) {
                     if(i % 3 == 0) {
-                        vtxReformed[i] = vv[0];
+                        vtxReformed[i] = vv2[0];
                     }
                     else if(i % 3 == 1) {
-                        vtxReformed[i] = vv[(i/3) + 1];
+                        vtxReformed[i] = vv2[(i/3) + 1];
                     }
                     else if(i % 3 == 2) {
-                        vtxReformed[i] = vv[(i/3) + 2];
+                        vtxReformed[i] = vv2[(i/3) + 2];
                     }
                 }
                 tempPt = add_element(vtxReformed, eNum-2, tri, &triArrSize, triTotalCount, norm, vtx);
@@ -256,14 +261,14 @@ int load_off_mesh(FILE * fp, jmesh * jm) {
         }
 
     }
-    /*
+
     avg_x = sum_x / vertexCount;
     avg_y = sum_y / vertexCount;
     avg_z = sum_z / vertexCount;
     printf("Max_x: %f , Min_x: %f, Avg_x: %f \n", max_x, min_x, avg_x);
     printf("Max_y: %f , Min_y: %f, Avg_y: %f \n", max_y, min_y, avg_y);
     printf("Max_z: %f , Min_z: %f, Avg_z: %f \n", max_z, min_z, avg_z);
-     */
+
     return vertexCount;
 }//
 // Created by Derek Sun on 2019/2/14.

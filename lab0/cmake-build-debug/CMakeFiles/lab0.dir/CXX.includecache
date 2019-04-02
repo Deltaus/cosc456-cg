@@ -21,6 +21,10 @@ stdlib.h
 -
 stdio.h
 -
+cstdio
+-
+string
+-
 OpenGL/gl.h
 -
 OpenGL/glu.h
@@ -39,6 +43,16 @@ jmesh.h
 /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.h
 
 /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/utils.h
+sys/stat.h
+-
+fcntl.h
+-
+unistd.h
+-
+stdio.h
+-
+string.h
+-
 jmesh.h
 /Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.h
 

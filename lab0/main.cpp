@@ -8,7 +8,7 @@ main(void)
 {
     jmesh * mesh;
 
-    FILE * fp = fopen("planets.off", "r");
+    FILE * fp = fopen("mushroom.off", "r");
     mesh = new_jmesh(fp);
     fclose(fp);
 
@@ -23,7 +23,16 @@ main(void)
         printf("\n");
     }
      */
-
+    /*
+    FILE * wf = fopen("/Users/deltau/MyDocuments/graphics/beethoven.obj", "w+");
+    int i;
+    for(i = 0; i < mesh->nvert; i++) {
+        fprintf(wf, "%s %f %f %f\n", "v", mesh->vertices[i*3], mesh->vertices[i*3+1], mesh->vertices[i*3+2]);
+    }
+    for(i = 0; i < mesh->ntri; i++) {
+        fprintf(wf, "%s %d %d %d\n", "f", mesh->triangles[i*3], mesh->triangles[i*3+1], mesh->triangles[i*3+2]);
+    }
+     */
     printf("nvert: %d ntri: %d", mesh->nvert, mesh->ntri);
     free_mesh(mesh);
 
