@@ -123,33 +123,6 @@ lab0/fast:
 	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/build
 .PHONY : lab0/fast
 
-hello.o: hello.cpp.o
-
-.PHONY : hello.o
-
-# target to build an object file
-hello.cpp.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.o
-.PHONY : hello.cpp.o
-
-hello.i: hello.cpp.i
-
-.PHONY : hello.i
-
-# target to preprocess a source file
-hello.cpp.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.i
-.PHONY : hello.cpp.i
-
-hello.s: hello.cpp.s
-
-.PHONY : hello.s
-
-# target to generate assembly for a file
-hello.cpp.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/hello.cpp.s
-.PHONY : hello.cpp.s
-
 jmesh.o: jmesh.cpp.o
 
 .PHONY : jmesh.o
@@ -204,6 +177,33 @@ library.c.s:
 	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/library.c.s
 .PHONY : library.c.s
 
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 offreader.o: offreader.cpp.o
 
 .PHONY : offreader.o
@@ -231,33 +231,6 @@ offreader.cpp.s:
 	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/offreader.cpp.s
 .PHONY : offreader.cpp.s
 
-utils.o: utils.cpp.o
-
-.PHONY : utils.o
-
-# target to build an object file
-utils.cpp.o:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.o
-.PHONY : utils.cpp.o
-
-utils.i: utils.cpp.i
-
-.PHONY : utils.i
-
-# target to preprocess a source file
-utils.cpp.i:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.i
-.PHONY : utils.cpp.i
-
-utils.s: utils.cpp.s
-
-.PHONY : utils.s
-
-# target to generate assembly for a file
-utils.cpp.s:
-	$(MAKE) -f CMakeFiles/lab0.dir/build.make CMakeFiles/lab0.dir/utils.cpp.s
-.PHONY : utils.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -267,21 +240,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... lab0"
-	@echo "... hello.o"
-	@echo "... hello.i"
-	@echo "... hello.s"
 	@echo "... jmesh.o"
 	@echo "... jmesh.i"
 	@echo "... jmesh.s"
 	@echo "... library.o"
 	@echo "... library.i"
 	@echo "... library.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... offreader.o"
 	@echo "... offreader.i"
 	@echo "... offreader.s"
-	@echo "... utils.o"
-	@echo "... utils.i"
-	@echo "... utils.s"
 .PHONY : help
 
 

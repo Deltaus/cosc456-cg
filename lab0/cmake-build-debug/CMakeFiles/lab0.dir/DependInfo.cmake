@@ -15,10 +15,9 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/GLUT.framework/Headers"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/hello.cpp" "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/lab0.dir/hello.cpp.o"
   "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/jmesh.cpp" "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/lab0.dir/jmesh.cpp.o"
+  "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/main.cpp" "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/lab0.dir/main.cpp.o"
   "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/offreader.cpp" "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/lab0.dir/offreader.cpp.o"
-  "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/utils.cpp" "/Users/deltau/MyProjects/GitHub/COSC456/dsun12/lab0/cmake-build-debug/CMakeFiles/lab0.dir/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
