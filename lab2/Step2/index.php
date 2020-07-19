@@ -41,7 +41,7 @@
 </div>
 
 <p>
-Back to <a href="../../index.html">Homepage</a>
+Back to <a href="../../index.php">Homepage</a>
 </p>
 
 
